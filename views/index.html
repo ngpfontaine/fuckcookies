@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Fuck Cookies</title>
+  <meta name="author" content="name">
+  <meta name="description" content="fuck cookies">
+  <meta name="keywords" content="fuck,cookies">
+  <link rel="shortcut icon" href="./favicon.png">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/bonkr.css">
+  <link rel="stylesheet" href="./css/bonkr-buttons.css">
+  </head>
+
+  <body>
+
+    <section class="text-center">
+      <h3>Fuck Cookies</h3>
+      <div id="number-agree" class="text-mono">&nbsp;</div>
+      <button id="btn-post-agree" class="btn">Agree</button>
+    </section>
+
+  </body>
+
+  <script>
+
+    const dom = {
+      btnAgree: document.getElementById("btn-post-agree"),
+      numAgree: document.getElementById("number-agree")
+    }
+
+    const poster = (endpoint, callback) => {
+      var req = new XMLHttpRequest()
+      req.open("POST", endpoint, true)
+      req.onload = () => {
+        if (req.status >= 200 && req.status < 400) {
+          let res = JSON.parse(req.responseText)
+          let counter = res.counter
+          callback(counter)
+        }
+        else {
+          console.log("POST error to: " + endpoint + ", code: " + req.status)  
+        }
+      }
+      req.onerror = () => {
+        console.log("POST error to: " + endpoint)
+      }
+      req.send()
+    }
+
+    const display = {
+      agree: (counter) => {
+        dom.numAgree.innerHTML = counter
+      }
+    }
+
+    dom.btnAgree.addEventListener("click", () => {
+      poster("/agree", display.agree)
+    })
+
+    window.addEventListener("load", () => {
+      poster("/check", display.agree)
+    })
+
+  </script>
+
+  <!-- <script src="./js/main.js"></script> -->
+
+</html>
