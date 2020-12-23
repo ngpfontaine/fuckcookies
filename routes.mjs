@@ -13,7 +13,7 @@ import { counter } from "./counter.mjs"
 export const routes = express.default.Router()
 
 const limiter = rLimit.default({
-  windowMs: 1 * 1000, // 5 seconds
+  windowMs: 60 * 60 * 1000, // 1 hr
   max: 1
 })
 

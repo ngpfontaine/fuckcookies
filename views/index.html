@@ -1,71 +1,109 @@
 <!DOCTYPE html>
 <html>
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex">
-  <title>Fuck Cookies</title>
-  <meta name="author" content="name">
-  <meta name="description" content="fuck cookies">
-  <meta name="keywords" content="fuck,cookies">
-  <link rel="shortcut icon" href="./favicon.png">
-  <link rel="stylesheet" href="./css/base.css">
-  <link rel="stylesheet" href="./css/bonkr.css">
-  <link rel="stylesheet" href="./css/bonkr-buttons.css">
-  </head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Fuck Cookies</title>
+<meta name="author" content="name">
+<meta name="description" content="fuck cookies">
+<meta name="keywords" content="fuck,cookies">
+<link rel="shortcut icon" href="./favicon.png">
+<link rel="stylesheet" href="./css/base.css">
+<link rel="stylesheet" href="./css/bonkr.css">
+<link rel="stylesheet" href="./css/bonkr-buttons.css">
+</head>
 
-  <body>
+<body>
 
-    <section class="text-center">
-      <h3>Fuck Cookies</h3>
-      <div id="number-agree" class="text-mono">&nbsp;</div>
-      <button id="btn-post-agree" class="btn">Agree</button>
+  <!-- Cookies Dialog -->
+  <aside class="dialog center active" id="dialog-0" role="dialog">
+    <div class="dialog-outer noevents" style="background:#F1EFEE;">
+      <div class="dialog-inner noevents-clear pd-a-5 rnd-5 w-mx-900" style="box-shadow:none;background:transparent;">
+
+        <section class="text-center">
+          <h3>Welcome</h3>
+          <p>This site doesn't use any cookies, because <span class="text-ul">fuck cookies</span>.</p>
+          <p>I mean OK, real talk - they're useful for login sessions, shopping carts, and shit. But, as-is tradition, some companies needed to track everything from your screen size to your but wiping habits, monetize it, and now the web kinda blows.</p>
+          <p>So... for the millionth time, you go to a site and are greeted with some stupid fucking message about cookies - with really only 1 option to proceed. Except this time, it's a little less shitty.</p>
+          <button id="btn-post-agree" class="btn">Accept</button>
+        </section>
+
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <article class="pos-fixed pos-all-0">
+  <section class="mg-0-auto w-mx-800 pos-center-v text-center">
+    <p>
+      <span id="number-agree" class="text-mono text-bold mg-r-2">&nbsp;</span>
+      <span>People &amp; counting have said "Fuck Off With Your Cookies".</span>
+    </p>
+    <p>Created by <a href="https://nicfontaine.com">Nic Fontaine</a>
     </section>
+  </article>
 
-  </body>
+</body>
 
-  <script>
+<script>
 
-    const dom = {
-      btnAgree: document.getElementById("btn-post-agree"),
-      numAgree: document.getElementById("number-agree")
+  const dom = {
+    btnAgree: document.getElementById("btn-post-agree"),
+    numAgree: document.getElementById("number-agree"),
+    dialog: {
+      welcome: document.getElementById("dialog-0")
     }
+  }
 
-    const poster = (endpoint, callback) => {
-      var req = new XMLHttpRequest()
-      req.open("POST", endpoint, true)
-      req.onload = () => {
-        if (req.status >= 200 && req.status < 400) {
-          let res = JSON.parse(req.responseText)
-          let counter = res.counter
-          callback(counter)
-        }
-        else {
-          console.log("POST error to: " + endpoint + ", code: " + req.status)  
-        }
+  const poster = (endpoint, callback) => {
+    var req = new XMLHttpRequest()
+    req.open("POST", endpoint, true)
+    req.onload = () => {
+      // Good
+      if (req.status >= 200 && req.status < 400) {
+        let res = JSON.parse(req.responseText)
+        let counter = res.counter
+        callback(counter)
       }
-      req.onerror = () => {
-        console.log("POST error to: " + endpoint)
+      // Too many requests
+      else if (req.status === 429) {
+        display.main()
+        alert("You hate cookies, we get it. Now fuck off.")
       }
-      req.send()
-    }
-
-    const display = {
-      agree: (counter) => {
-        dom.numAgree.innerHTML = counter
+      // Bad
+      else {
+        console.log("POST error to: " + endpoint + ", code: " + req.status)  
       }
     }
+    req.onerror = () => {
+      console.log("POST error to: " + endpoint)
+    }
+    req.send()
+  }
 
-    dom.btnAgree.addEventListener("click", () => {
-      poster("/agree", display.agree)
+  const display = {
+    number: (counter) => {
+      dom.numAgree.innerHTML = Number(counter).toLocaleString()
+    },
+    main: () => {
+      dom.dialog.welcome.classList.remove("active")
+    }
+  }
+
+  dom.btnAgree.addEventListener("click", () => {
+    poster("/agree", (res) => {
+      display.number(res)
+      display.main()
     })
+  })
 
-    window.addEventListener("load", () => {
-      poster("/check", display.agree)
-    })
+  window.addEventListener("load", () => {
+    poster("/check", display.number)
+  })
 
-  </script>
+</script>
 
-  <!-- <script src="./js/main.js"></script> -->
+<script src="./js/dialog.js"></script>
 
 </html>

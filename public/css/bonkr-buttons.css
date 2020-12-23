@@ -1,4 +1,20 @@
 button, .btn, input[type='submit'] {
+  /* display: inline-block; */
+  cursor: pointer;
+  line-height: 1em;
+  border-width: 2px;
+  /* border-width: 1px; */
+  border-style: solid;
+  font-size: 1em;
+  padding: .47rem .95rem;
+  color: inherit;
+  font-family: inherit;
+  font-weight: bold; }
+
+/* (NOTE) May conflict w/ links or buttons, not sure yet */
+.btn, .btn:hover, .btn:focus { text-decoration: none; display: inline-block; }
+
+button, .btn, input[type='submit'] {
   border-width: 2px;
   border-style: solid; }
 

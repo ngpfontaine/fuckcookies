@@ -96,6 +96,7 @@ pre > code {
 .pos-rel { position: relative; }
 .pos-fixed { position: fixed; }
 .pos-all-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.pos-center-v { top: 50%; transform: translateY(-50%); }
 
 /*** Templating --- Display ***/
 .d-block, button.d-block, .btn.d-block, .input[type='submit'].d-block { display: block; }
@@ -379,6 +380,6 @@ body.dialog-active {
   pointer-events: none;
   display: none; }
 
-.dialog-btn-close {
+/*.dialog-btn-close {
   position: absolute;
-  top: 0; right: 0; }
+  top: 0; right: 0; }*/
