@@ -12,6 +12,16 @@
 <link rel="stylesheet" href="./css/base.css">
 <link rel="stylesheet" href="./css/bonkr.css">
 <link rel="stylesheet" href="./css/bonkr-buttons.css">
+<style>
+  body {
+    overflow-x: hidden;
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+  }
+  #dialog-0 .dialog-inner {
+    background: rgba(255,255,255,0.6);
+  }
+</style>
 </head>
 
 <body>
@@ -19,13 +29,22 @@
   <!-- Cookies Dialog -->
   <aside class="dialog center active" id="dialog-0" role="dialog">
     <div class="dialog-outer noevents" style="background:#F1EFEE;">
-      <div class="dialog-inner noevents-clear pd-a-5 rnd-5 w-mx-900" style="box-shadow:none;background:transparent;">
+      <div class="dialog-inner noevents-clear pd-a-5" style="box-shadow:none;">
 
-        <section class="text-center">
+        <section class="text-center w-mx-900" style="padding-top:5rem;padding-bottom:5rem;">
+          
           <h3>Welcome</h3>
-          <p>This site doesn't use any cookies, because <span class="text-ul">fuck cookies</span>.</p>
-          <p>I mean OK, real talk - they're useful for login sessions, shopping carts, and shit. But, as-is tradition, some companies needed to track everything from your screen size to your but wiping habits, monetize it, and now the web kinda blows.</p>
-          <p>So... for the millionth time, you go to a site and are greeted with some stupid fucking message about cookies - with really only 1 option to proceed. Except this time, it's a little less shitty.</p>
+          
+          <p>
+            This site doesn't use any cookies to enhance or degrade your experience, because <span class="text-ul">fuck cookies</span>.
+          </p>
+          <p>
+            I mean OK, real talk - they're useful for login sessions, shopping carts, and shit. But, as-is tradition, some companies needed to track everything from your screen size to your butt wiping habits, monetize it, and now the web kinda blows.
+          </p>
+          
+          <p>
+            So... for the millionth time, you go to a site and are greeted with some stupid fucking message about cookies - with really only 1 option to proceed. Except this time, it's a little less shitty.
+          </p>
           <button id="btn-post-agree" class="btn">Accept</button>
         </section>
 
@@ -34,13 +53,40 @@
   </aside>
 
   <!-- Main Content -->
-  <article class="pos-fixed pos-all-0">
-  <section class="mg-0-auto w-mx-800 pos-center-v text-center">
-    <p>
-      <span id="number-agree" class="text-mono text-bold mg-r-2">&nbsp;</span>
-      <span>People &amp; counting have said "Fuck Off With Your Cookies".</span>
-    </p>
-    <p>Created by <a href="https://nicfontaine.com">Nic Fontaine</a>
+  <article class="pd-t-6">
+    <section class="mg-0-auto w-mx-800">
+
+      <blockquote class="pd-a-5 text-center" style="font-size:1.1rem;">
+        <p class="mg-b-1">
+          <span id="number-agree" class="text-mono text-bold mg-r-2">&nbsp;</span>
+          <span>People &amp; counting have said "Fuck Off With Your Cookies".</span>
+        </p>
+        <p class="text-light text-small">Created by <a href="https://nicfontaine.com">Nic Fontaine</a></p>
+      </blockquote>
+
+      <div style="height:3rem;"></div>
+
+      <h3 class="mg-b-0">FAQ</h3>
+      <hr class="mg-t-1 mg-b-6">
+
+      <p class="text-bold mg-b-1">What about rate limiting on repeat attempts?</p>
+      <p class="mg-b-6">Using <a href="https://www.npmjs.com/package/express-rate-limit" target="_blank">express-rate-limit</a>, which caches client IP in backend memory (no DB) and limits "Agree" post requests to once daily</p>
+
+      <p class="text-bold mg-b-1">But what about LocalStorage!</p>
+      <p class="mg-b-6">Right, we should probably make localstorage banners too /s</p>
+
+      <p class="text-bold mg-b-1">Remarketing, Heatmaps, Chubspot all help enhance our marketing with user insight!</p>
+      <p class="mg-b-6">Maybe your product just sucks</p>
+
+      <p class="text-bold mg-b-1">I bet your code/stack/syntax/accessibility/webpack-config sucks</p>
+      <p class="mg-b-6">Probably. <a href="https://github.com/ngpfontaine/fuckcookies" target="_blank">source</a> <span class="text-light">(github)</span></p>
+
+      <p class="text-bold mg-b-1">Now what?</p>
+      <p class="mg-b-6">I dunno, share this? Donate to <a href="https://www.eff.org">EFF</a>?</p>
+
+      <p class="text-bold mg-b-1">What are the best cookies?</p>
+      <p>Oreos are pretty good, and vegan.</p>
+
     </section>
   </article>
 

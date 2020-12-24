@@ -338,7 +338,7 @@ body.dialog-active {
 
 .dialog-outer {
   width: 100%;
-  padding: 1.17rem;
+  padding: 0;
   background: rgba(0,0,0,0.5);
   height: 100%; 
   top: 0; bottom: 0; right: 0; left: 0;
@@ -352,24 +352,32 @@ body.dialog-active {
   margin: 0 auto;
   z-index: 105;
   position: relative;
+  padding: 0;
   top: 0; bottom: 0; right: 0; left: 0;
   margin-bottom: 1.17rem; }
 
+.dialog.center {
+  padding: 0;
+  right: 0;
+}
+.dialog.center .dialog-outer {
+  position: relative;
+}
 .dialog.center .dialog-inner {
-  position: absolute;
-  margin: 2rem auto;
-  top: 1.4rem;
-  transform: translateY(2%);
+  /*position: absolute;*/
+  margin: 0 auto 4rem;
+  /*top: 50%;*/
+  transform: translateY(-10%);
   transition: all 0.15s;
   bottom: initial; }
 
 .dialog.center.active .dialog-inner {
-  transform: translateY(0);
+  transform: translateY(0%);
 }
 
-.dialog.center .dialog-outer {
+/*.dialog.center .dialog-outer {
   position: fixed;
-  top: 0; bottom: 0; }
+  top: 0; bottom: 0; }*/
 
 .dialog-mask {
   background: rgba(0,0,0,0.5);
